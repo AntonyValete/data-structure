@@ -7,6 +7,17 @@ typedef struct node {
     struct node *left, *right;
 } node;
 
+node *create_new_node(int data);
+node *search_node(node *root, int key_value);
+node *insert_node(node *tree, int data);
+void inorder_tree_walk(node *root);
+void error_handler(int error_code);
+
+int main() {
+    
+    return 0;
+}
+
 node *create_new_node(int data) {
     node *dummy = (node *) malloc(sizeof(node));
 
@@ -33,7 +44,6 @@ void error_handler(int error_code) {
     }
 }
 
-
 node *insert_node(node *tree, int data) {
     if (tree == NULL)
         return create_new_node(data);
@@ -54,9 +64,4 @@ void inorder_tree_walk(node *root) {
         printf("%d -> ", root->data);
         inorder_tree_walk(root->right);
     }
-}
-
-int main() {
-    
-    return 0;
 }
