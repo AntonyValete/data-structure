@@ -2,22 +2,30 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct nod {
+typedef struct node {
     int data;
-    struct nod *left, *right;
-} nod;
+    struct node *left, *right;
+} node;
 
-nod ROOT = {
-    .data = 0,
-    .left = NULL,
-    .right = NULL
-};
+node *insert_node(node *tree, int data) {
+    if (tree == NULL)
+        return create_new_node(data);
 
-void inorder_tree_walk(nod *x) {
-    if (x != NULL) {
-        inorder_tree_walk(x->left);
-        printf("%d -> ", x->data);
-        inorder_tree_walk(x->right);
+    if (tree->data > data)
+        tree->left = insert_node(tree->left, data);
+    else if (tree->data < data)
+        tree->right = insert_node(tree->right, data);
+    else
+        error_handler(1);
+
+    return tree;
+}
+
+void inorder_tree_walk(node *root) {
+    if (root != NULL) {
+        inorder_tree_walk(root->left);
+        printf("%d -> ", root->data);
+        inorder_tree_walk(root->right);
     }
 }
 
