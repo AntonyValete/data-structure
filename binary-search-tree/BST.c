@@ -16,6 +16,23 @@ node *create_new_node(int data) {
     return dummy;
 }
 
+node *search_node(node *root, int key_value) {
+    if (root == NULL || root->data == key_value)
+        return root;
+
+    if (root->data > key_value)
+        return search_node(root->left, key_value);
+    return search_node(root->right, key_value);
+}
+
+void error_handler(int error_code) {
+    switch (error_code) {
+        case 1:
+            fprintf(stderr, "ERROR. THERE MUST NOT BE DUPLICATES\n\n");
+            break;
+    }
+}
+
 
 node *insert_node(node *tree, int data) {
     if (tree == NULL)
